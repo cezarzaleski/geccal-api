@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { AutorEntity } from 'src/entity/autor.entity';
+import { Autor } from 'src/entity/autor';
 import { AutorService } from 'src/services/autor.service';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AutorParams } from 'src/controllers/autor.params';
@@ -27,18 +27,18 @@ export class AutorController {
   }
 
   @Post('')
-  async salvar(@Body() autor: AutorEntity) {
+  async salvar(@Body() autor: Autor) {
     return await this.autorService.salvar(autor);
   }
 
   @ApiCreatedResponse({
     description: 'Obter autor pelo identificador',
-    type: AutorEntity,
+    type: Autor,
   })
 
   @Get('/obter/:id')
 
-  obter(): AutorEntity {
+  obter(): Autor {
     return {
       idAutor: 1,
       noAutor: 'Teste',

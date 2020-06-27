@@ -1,16 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { AutorEntity } from 'src/entity/autor.entity';
+import { Autor } from 'src/entity/autor';
 import { AutorParams } from 'src/controllers/autor.params';
 
 @Injectable()
 export class AutorService {
   constructor(
     @Inject('AUTOR_REPOSITORY')
-    private autorRepository: Repository<AutorEntity>,
+    private autorRepository: Repository<Autor>,
   ) {}
 
-  listar(autorParams: AutorParams): Promise<[AutorEntity[], number]> {
+  listar(autorParams: AutorParams): Promise<[Autor[], number]> {
     delete autorParams.count;
     delete autorParams.page;
     return this.autorRepository.findAndCount({
@@ -20,7 +20,7 @@ export class AutorService {
     });
   }
 
-  salvar(autor: AutorEntity): Promise<AutorEntity> {
+  salvar(autor: Autor): Promise<Autor> {
     autor.dtCadastro = new Date();
     autor.stAtivo = true;
     return this.autorRepository.save(autor);
