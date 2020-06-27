@@ -10,7 +10,7 @@ export class AutorService {
     private autorRepository: Repository<AutorEntity>,
   ) {}
 
-  findAll(autorParams: AutorParams): Promise<[AutorEntity[], number]> {
+  listar(autorParams: AutorParams): Promise<[AutorEntity[], number]> {
     delete autorParams.count;
     delete autorParams.page;
     return this.autorRepository.findAndCount({
@@ -18,5 +18,11 @@ export class AutorService {
       take: autorParams.page,
       skip: (autorParams.page) * autorParams.count
     });
+  }
+
+  salvar(autor: AutorEntity): Promise<AutorEntity> {
+    autor.dtCadastro = new Date();
+    autor.stAtivo = true;
+    return this.autorRepository.save(autor);
   }
 }
