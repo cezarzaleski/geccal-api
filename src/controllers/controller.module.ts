@@ -4,8 +4,8 @@ import { PaginateMiddleware } from 'src/middlewares/paginate.middleware';
 
 export class ControllerModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(PaginateMiddleware)
-      .forRoutes('autores');
+    // consumer
+    //   .apply(PaginateMiddleware)
+    //   .forRoutes('autores');
   }
 }
