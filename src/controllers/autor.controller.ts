@@ -16,6 +16,7 @@ export class AutorController {
     description: 'Lista de autores com base nos parâmetros',
     type: Autor
   })
+  @Get('')
   async listar(@Query() autorParams: AutorParams) {
     const page = autorParams.page;
     return await this.autorService.listar(autorParams)
