@@ -45,7 +45,7 @@ export class AutorController {
   obter(): Autor {
     return {
       idAutor: 1,
-      noAutor: 'Teste',
+      noAutor: 'Teste pull request',
       stAtivo: true
     }
   }
