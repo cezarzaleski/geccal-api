@@ -1,5 +1,5 @@
 import { Connection, createConnection } from 'typeorm';
-import { AutorEntity } from 'src/entity/autor.entity';
+import { Autor } from 'src/entity/autor';
 
 
 export const databaseProviders = [
@@ -13,14 +13,14 @@ export const databaseProviders = [
         username: 'b5351039e7e463',
         password: '021fafa0',
         database: 'heroku_fe076c2ee5de15b',
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        synchronize: true,
+        entities: [__dirname + '/../entity/**{.ts,.js}'],
+        synchronize: false,
         logging: 'all'
       }),
   },
   {
     provide: 'AUTOR_REPOSITORY',
-    useFactory: (connection: Connection) => connection.getRepository(AutorEntity),
+    useFactory: (connection: Connection) => connection.getRepository(Autor),
     inject: ['DATABASE_CONNECTION'],
   },
 ];
