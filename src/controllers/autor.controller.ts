@@ -12,6 +12,10 @@ export class AutorController {
     private autorService: AutorService
   ) {}
 
+  @ApiCreatedResponse({
+    description: 'Lista de autores com base nos parâmetros',
+    type: Autor
+  })
   @Get('')
   async listar(@Query() autorParams: AutorParams) {
     const page = autorParams.page;
