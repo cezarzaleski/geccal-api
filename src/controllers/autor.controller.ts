@@ -12,7 +12,10 @@ export class AutorController {
     private autorService: AutorService
   ) {}
 
-  @Get('')
+  @ApiCreatedResponse({
+    description: 'Lista de autores com base nos parâmetros',
+    type: AutorEntity
+  })
   async listar(@Query() autorParams: AutorParams) {
     const page = autorParams.page;
     return await this.autorService.findAll(autorParams)
