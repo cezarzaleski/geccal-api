@@ -14,7 +14,7 @@ export class AutorController {
 
   @ApiCreatedResponse({
     description: 'Lista de autores com base nos parâmetros',
-    type: AutorEntity
+    type: Autor
   })
   async listar(@Query() autorParams: AutorParams) {
     const page = autorParams.page;
