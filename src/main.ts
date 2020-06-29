@@ -25,8 +25,8 @@ async function bootstrap() {
     module.hot.dispose(() => app.close());
   }
   app.useGlobalPipes(new ValidationPipe());
-  // const port = + process.env.PORT || 3000;
+  const port = + (process.env.PORT || 3000);
 
-  await app.listen(80);
+  await app.listen(port);
 }
 bootstrap();
