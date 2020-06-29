@@ -6,8 +6,8 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AutenticacaoService {
   constructor(
-    private usuarioService: UsuarioService,
-    private jwtService: JwtService
+    private readonly usuarioService: UsuarioService,
+    private readonly jwtService: JwtService
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {

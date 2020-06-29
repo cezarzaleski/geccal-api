@@ -6,7 +6,7 @@ import { AutorRepository } from 'src/autor/autor.repository';
 @Injectable()
 export class AutorService {
   constructor(
-    private autorRepository: AutorRepository,
+    private readonly autorRepository: AutorRepository,
   ) {}
 
   listar(autorParams: AutorParams): Promise<[Autor[], number]> {
