@@ -7,7 +7,7 @@ import { Usuario } from 'src/usuario/usuario';
 
 export const databaseProviders = [
   {
-    provide: 'DATABASE_CONNECTION',
+    provide: Connection,
     useFactory: async () =>
       await createConnection({
         type: 'mysql',
@@ -22,14 +22,14 @@ export const databaseProviders = [
       }),
   },
   {
-    provide: 'AutorRepository',
+    provide: AutorRepository,
     useFactory: (connection: Connection) => connection.getCustomRepository(AutorRepository),
-    inject: ['DATABASE_CONNECTION'],
+    inject: [Connection],
   },
   {
-    provide: 'UsuarioRepository',
+    provide: UsuarioRepository,
     useFactory: (connection: Connection) => connection.getCustomRepository(UsuarioRepository),
-    inject: ['DATABASE_CONNECTION'],
+    inject: [Connection],
   }
 
 ];

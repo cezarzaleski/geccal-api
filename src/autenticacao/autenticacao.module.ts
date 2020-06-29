@@ -14,7 +14,7 @@ import { AutenticacaoController } from './autenticacao.controller';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '2 days' },
     })
   ],
   providers: [AutenticacaoService, LocalStrategy, JwtStrategy],

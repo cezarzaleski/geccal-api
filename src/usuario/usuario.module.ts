@@ -3,7 +3,9 @@ import { UsuarioService } from 'src/usuario/usuario.service';
 import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
-  providers: [UsuarioService],
+  providers: [
+    UsuarioService,
+  ],
   exports: [UsuarioService],
   imports: [DatabaseModule]
 })
