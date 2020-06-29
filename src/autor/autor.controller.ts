@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { Autor } from 'src/autor/autor';
 import { AutorService } from 'src/autor/autor.service';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
@@ -16,7 +16,8 @@ export class AutorController {
 
   @ApiCreatedResponse({
     description: 'Lista de autores com base nos parâmetros',
-    type: Autor
+    type: Autor,
+    status: HttpStatus.OK
   })
   @Get('')
   @UseGuards(JwtAuthGuard)
