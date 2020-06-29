@@ -4,7 +4,7 @@ import { IsNotEmpty } from 'class-validator';
 
 
 @Entity({name: 'autor'})
-export class AutorEntity {
+export class Autor {
   @ApiProperty()
   @PrimaryGeneratedColumn({name: 'id_autor'})
   idAutor: number;

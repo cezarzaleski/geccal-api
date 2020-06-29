@@ -9,7 +9,7 @@ import { JwtAuthGuard } from 'src/autenticacao/jwt-auth.guard';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    // private readonly autenticacaoService: AutenticacaoService
+    private readonly autenticacaoService: AutenticacaoService
   ) {}
 
   @Get()
@@ -17,11 +17,11 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  // @UseGuards(LocalAuthGuard)
-  // @Post('auth/login')
-  // async login(@Request() req) {
-  //   return this.autenticacaoService.login(req.user);
-  // }
+  @UseGuards(LocalAuthGuard)
+  @Post('auth/login')
+  async login(@Request() req) {
+    return this.autenticacaoService.login(req.user);
+  }
   //
   // @UseGuards(JwtAuthGuard)
   // @Get('profile')

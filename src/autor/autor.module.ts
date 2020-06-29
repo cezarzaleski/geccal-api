@@ -4,6 +4,7 @@ import { AutorService } from 'src/autor/autor.service';
 import { DatabaseModule } from 'src/database.module';
 
 @Module({
+  // imports: [DatabaseModule],
   imports: [DatabaseModule],
   controllers: [AutorController],
   providers: [AutorService],

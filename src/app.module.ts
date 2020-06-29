@@ -9,6 +9,8 @@ import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 import { UsuarioService } from './usuario/usuario.service';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AutorModule } from './autor/autor.module';
+import { databaseProviders } from 'src/providers/database.providers';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
