@@ -1,20 +1,19 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { Autor } from 'src/entity/autor';
-import { AutorParams } from 'src/controllers/autor.params';
+import { Injectable } from '@nestjs/common';
+import { Autor } from 'src/autor/autor';
+import { AutorParams } from 'src/autor/autor.params';
+import { AutorRepository } from 'src/autor/autor.repository';
 
 @Injectable()
 export class AutorService {
   constructor(
-    @Inject('AUTOR_REPOSITORY')
-    private autorRepository: Repository<Autor>,
+    private readonly autorRepository: AutorRepository,
   ) {}
 
   listar(autorParams: AutorParams): Promise<[Autor[], number]> {
     delete autorParams.count;
     delete autorParams.page;
     return this.autorRepository.findAndCount({
-      where: autorParams,
+      where: {...autorParams},
       take: autorParams.page,
       skip: (autorParams.page) * autorParams.count
     });

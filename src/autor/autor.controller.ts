@@ -1,12 +1,14 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { Autor } from 'src/entity/autor';
-import { AutorService } from 'src/services/autor.service';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { AutorParams } from 'src/controllers/autor.params';
+import { Body, Controller, Get, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
+import { Autor } from 'src/autor/autor';
+import { AutorService } from 'src/autor/autor.service';
+import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { AutorParams } from 'src/autor/autor.params';
+import { JwtAuthGuard } from 'src/autenticacao/jwt-auth.guard';
 
 
 @ApiTags('autores')
 @Controller({path: '/autores'})
+@ApiBearerAuth()
 export class AutorController {
   constructor(
     private autorService: AutorService
@@ -14,9 +16,11 @@ export class AutorController {
 
   @ApiCreatedResponse({
     description: 'Lista de autores com base nos parâmetros',
-    type: Autor
+    type: Autor,
+    status: HttpStatus.OK
   })
   @Get('')
+  @UseGuards(JwtAuthGuard)
   async listar(@Query() autorParams: AutorParams) {
     const page = autorParams.page;
     return await this.autorService.listar(autorParams)
@@ -31,6 +35,7 @@ export class AutorController {
   }
 
   @Post('')
+  @UseGuards(JwtAuthGuard)
   async salvar(@Body() autor: Autor) {
     return await this.autorService.salvar(autor);
   }
@@ -41,7 +46,7 @@ export class AutorController {
   })
 
   @Get('/obter/:id')
-
+  @UseGuards(JwtAuthGuard)
   obter(): Autor {
     return {
       idAutor: 1,

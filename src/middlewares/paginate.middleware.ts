@@ -4,9 +4,11 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 export class PaginateMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: Function) {
     // @ts-ignore
+    console.log('req.query', req.query)
+    // @ts-ignore
     if (!req.query.page) req.query.page = 0;
     // @ts-ignore
-    if (!req.query.count) req.query.count = 10;
+    // if (!req.query.count) req.query.count = 10;
     console.log('response', res.body);
     next();
 
