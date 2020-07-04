@@ -15,7 +15,7 @@ export class AutorController {
   ) {}
 
   @ApiCreatedResponse({
-    description: 'Lista de autores com base nos parâmetros',
+    description: 'Listar autores',
     type: Autor,
     isArray: true,
     status: HttpStatus.OK
@@ -42,7 +42,7 @@ export class AutorController {
   }
 
   @ApiCreatedResponse({
-    description: 'Obter autor pelo identificador',
+    description: 'Obter autor',
     type: Autor,
     status: HttpStatus.OK
   })
@@ -53,7 +53,7 @@ export class AutorController {
   }
 
   @ApiCreatedResponse({
-    description: 'Excluir autores logicamente',
+    description: 'Excluir autor logicamente',
     type: Autor,
     isArray: true,
     status: HttpStatus.OK
@@ -65,7 +65,7 @@ export class AutorController {
   }
 
   @ApiCreatedResponse({
-    description: 'Excluir autores logicamente',
+    description: 'Atualizar autor',
     type: Autor,
     isArray: true,
     status: HttpStatus.OK
