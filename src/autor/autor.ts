@@ -16,7 +16,7 @@ export class Autor {
 
   @ApiProperty()
   @Column({name: 'st_ativo'})
-  stAtivo: boolean;
+  stAtivo: number;
 
   @ApiProperty()
   @Column({name: 'dt_cadastro'})

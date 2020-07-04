@@ -33,3 +33,8 @@ export const databaseProviders = [
   }
 
 ];
+
+export enum SituacaoEnum {
+  Ativo = 1,
+  Inativo = 0
+}

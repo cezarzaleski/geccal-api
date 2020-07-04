@@ -9,4 +9,7 @@ export class AutorParams {
 
   @ApiModelProperty({required: false})
   noAutor: string;
+
+  @ApiModelProperty({default: 1, required: false})
+  stAtivo: number;
 }
