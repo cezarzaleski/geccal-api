@@ -71,7 +71,7 @@ export class AutorController {
     status: HttpStatus.OK
   })
   @Put('/:idAutor')
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   atualizar(@Param('idAutor') idAutor: number, @Body() autor: Autor) {
     return this.autorService.atualizar(autor, idAutor);
   }
