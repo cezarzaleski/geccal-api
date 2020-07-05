@@ -3,6 +3,8 @@ import { Autor } from 'src/autor/autor';
 import { AutorRepository } from 'src/autor/autor.repository';
 import { UsuarioRepository } from 'src/usuario/usuario.repository';
 import { Usuario } from 'src/usuario/usuario';
+import { Editora } from 'src/editora/editora';
+import { EditoraRepository } from 'src/editora/editora.repository';
 
 
 export const databaseProviders = [
@@ -16,7 +18,7 @@ export const databaseProviders = [
         username: 'b5351039e7e463',
         password: '021fafa0',
         database: 'heroku_fe076c2ee5de15b',
-        entities: [Autor, Usuario],
+        entities: [Autor, Usuario, Editora],
         synchronize: false,
         logging: 'all'
       }),
@@ -29,6 +31,11 @@ export const databaseProviders = [
   {
     provide: UsuarioRepository,
     useFactory: (connection: Connection) => connection.getCustomRepository(UsuarioRepository),
+    inject: [Connection],
+  },
+  {
+    provide: EditoraRepository,
+    useFactory: (connection: Connection) => connection.getCustomRepository(EditoraRepository),
     inject: [Connection],
   }
 

@@ -7,13 +7,15 @@ import { UsuarioService } from './usuario/usuario.service';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AutorModule } from './autor/autor.module';
 import { DatabaseModule } from './database/database.module';
+import { EditoraModule } from './editora/editora.module';
 
 @Module({
   imports: [
     DatabaseModule,
     AutorModule,
     AutenticacaoModule,
-    UsuarioModule
+    UsuarioModule,
+    EditoraModule
   ],
   controllers: [AppController],
   providers: [AppService, AutorService, UsuarioService],

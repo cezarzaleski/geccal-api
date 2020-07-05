@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+
 declare const module: any;
 
 
@@ -17,16 +18,15 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
-
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
   app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('api');
   const port = + (process.env.PORT || 3000);
-
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('swagger', app, document);
   await app.listen(port, '0.0.0.0')
 
 }
