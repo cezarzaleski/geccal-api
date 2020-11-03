@@ -13,7 +13,6 @@ export class AutenticacaoService {
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usuarioService.findOne(username);
     if (!user) return null;
-    console.log('sss', user.noSenha)
     const senhaValida = await bcrypt.compare(pass, user.noSenha)
     if (senhaValida) {
       const { noSenha, ...result } = user;

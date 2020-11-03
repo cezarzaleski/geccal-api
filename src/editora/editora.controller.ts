@@ -4,6 +4,7 @@ import { JwtAuthGuard } from 'src/autenticacao/jwt-auth.guard';
 import { EditoraService } from 'src/editora/editora.service';
 import { EditoraParams } from 'src/editora/editora.params';
 import { Editora } from 'src/editora/editora';
+import { SituacaoEnum } from 'src/enums/situacao.enum';
 
 
 @ApiTags('editoras')
@@ -24,6 +25,7 @@ export class EditoraController {
   @UseGuards(JwtAuthGuard)
   listar(@Query() editoraParams: EditoraParams) {
     const page = editoraParams.page;
+    // delete editoraParams.situacao;
     return this.editoraService.listar(editoraParams)
       .then(([editoras, total]) => {
         return {

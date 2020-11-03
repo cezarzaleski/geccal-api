@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { EditoraRepository } from 'src/editora/editora.repository';
 import { EditoraParams } from 'src/editora/editora.params';
 import { Editora } from 'src/editora/editora';
+import { formatarParams } from 'src/utils/utilitarias';
 
 @Injectable()
 export class EditoraService {
@@ -14,7 +15,7 @@ export class EditoraService {
   ) {}
 
   listar(editoraParams: EditoraParams): Promise<[Editora[], number]> {
-    const params = {...editoraParams};
+    const params = formatarParams(editoraParams);
     delete params.count;
     delete params.page;
     return this.editoraRepository.findAndCount({

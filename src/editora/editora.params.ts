@@ -1,15 +1,8 @@
 import { ApiModelProperty } from '@nestjs/swagger/dist/decorators/api-model-property.decorator';
+import { AbstractParams } from 'src/params/abstract.params';
 
-export class EditoraParams {
-  @ApiModelProperty({default: 0, required: false})
-  page: number;
-
-  @ApiModelProperty({default: 10, required: false})
-  count: number;
+export class EditoraParams extends AbstractParams {
 
   @ApiModelProperty({required: false})
   noEditora: string;
-
-  @ApiModelProperty({default: 1, required: false})
-  stAtivo: number;
 }
