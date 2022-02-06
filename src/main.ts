@@ -1,33 +1,32 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ValidationPipe } from '@nestjs/common';
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import * as dotenv from 'dotenv'
+import { ConnectionAdapter } from 'src/shared/infra/database/connection-adapter'
+dotenv.config()
 
-declare const module: any;
-
-
-async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter()
-  );
-  const options = new DocumentBuilder()
-    .setTitle('API')
-    .setDescription('API')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
-  if (module.hot) {
-    module.hot.accept();
-    module.hot.dispose(() => app.close());
-  }
-  app.useGlobalPipes(new ValidationPipe());
-  app.setGlobalPrefix('api');
-  const port = + (process.env.PORT || 3000);
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('swagger', app, document);
-  await app.listen(port, '0.0.0.0')
-
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const chooseFramework = async () => {
+  return import('./shared/infra/http/nestjs/index').then(async (framework) => framework.nestApp())
 }
-bootstrap();
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const chooseDatabase = () => {
+  return new ConnectionAdapter()
+}
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const startServer = async () => {
+  const database = chooseDatabase()
+  const app = await chooseFramework()
+  const port = process.env.PORT
+  database
+    .connect()
+    .then(async () => {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      await app.listen(port, () => console.log(`server running at: http://localhost:${port}/api`))
+    })
+    .catch((error) => {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      console.error(`database connection problem: ${error}`)
+    })
+}
+
+void startServer().then(() => console.info('start'))

@@ -1,0 +1,7 @@
+{
+  "*.ts": [
+    "eslint . --fix",
+    "jest --bail --findRelatedTests",
+    "npm run test:staged"
+  ]
+}

@@ -1,15 +1,21 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
     "module": "commonjs",
+    "target": "es2019",
     "declaration": true,
     "removeComments": true,
+    "strict": true,
+    "strictNullChecks": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2017",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
     "sourceMap": true,
-    "outDir": "./dist",
+    "rootDirs": ["src", "test"],
     "baseUrl": "./",
-    "incremental": true
   },
-  "exclude": ["node_modules", "dist"]
+  "include": ["src", "test"],
+  "exclude": []
 }
