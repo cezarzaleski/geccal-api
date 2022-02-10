@@ -1,3 +1,4 @@
-export interface DatabaseConnection<T = any> {
-  connect: () => Promise<T>
+export default interface DatabaseConnection {
+  query(statement: string, params: any): any;
+  connect: () => Promise<any>
 }

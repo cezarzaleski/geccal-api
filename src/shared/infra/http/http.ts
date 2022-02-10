@@ -3,7 +3,7 @@ import EmptyParamError from 'src/shared/exception/empty-param'
 import InvalidEmailError from 'src/shared/exception/invalid-email'
 import NotFoundError from 'src/shared/exception/not-found'
 import InvalidParamError from 'src/shared/exception/invalid-param'
-import UnauthorizedError from 'src/authenticate/domain/exception/unauthorized'
+import UnauthorizedError from 'src/acesso-identificacao/domain/exception/unauthorized'
 
 export type HttpResponse<T = any> = {
   statusCode: number
