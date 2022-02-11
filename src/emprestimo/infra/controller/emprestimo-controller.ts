@@ -1,8 +1,8 @@
 import { created, httpResponseError } from 'src/shared/infra/http/http';
 import RegistrarEmprestimo from 'src/emprestimo/application/usecase/registrar-emprestimo';
 import { RegistrarEmprestimoInput } from 'src/emprestimo/application/dto/registrar-emprestimo-input';
-import AbstractRepositoryFactory from 'src/acesso-identificacao/domain/factory/abstract-repository-factory';
 import EmprestimoRepository from 'src/emprestimo/domain/repository/emprestimo-repository';
+import AbstractRepositoryFactory from 'src/shared/domain/factory/abstract-repository-factory';
 
 export default class EmprestimoController {
   emprestimoRepository: EmprestimoRepository

@@ -1,5 +1,5 @@
 import * as faker from 'faker';
-import Livro from 'src/acesso-identificacao/livro/domain/entity/livro';
+import Livro from 'src/livro/domain/entity/livro';
 
 export type LivroParams = {
   nome?: string,

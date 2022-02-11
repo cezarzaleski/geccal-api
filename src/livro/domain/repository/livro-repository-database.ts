@@ -1,6 +1,6 @@
 import DatabaseConnection from 'src/shared/infra/database/database-connection';
-import LivroRepository from 'src/emprestimo/domain/repository/livro-repository';
-import Livro from 'src/acesso-identificacao/livro/domain/entity/livro';
+import LivroRepository from 'src/livro/domain/repository/livro-repository';
+import Livro from 'src/livro/domain/entity/livro';
 
 export default class LivroRepositoryDatabase implements LivroRepository {
   constructor(readonly databaseConnection: DatabaseConnection) {}

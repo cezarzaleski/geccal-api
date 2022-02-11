@@ -8,13 +8,13 @@ import { mockColaborador } from 'test/acesso-identificacao/domain/entity/mock-co
 import Usuario from 'src/acesso-identificacao/domain/entity/usuario';
 import Colaborador from 'src/acesso-identificacao/domain/entity/colaborador';
 import { mockAutor } from 'test/livro/domain/mock-autor';
-import Autor from 'src/acesso-identificacao/livro/domain/entity/autor';
-import Editora from 'src/acesso-identificacao/livro/domain/entity/editora';
 import { mockEditora } from 'test/livro/domain/mock-editora';
-import Livro from 'src/acesso-identificacao/livro/domain/entity/livro';
 import { mockLivro } from 'test/livro/domain/mock-livro';
 import DatabaseConnection from 'src/shared/infra/database/database-connection';
 import AbstractRepositoryFactory from 'src/shared/domain/factory/abstract-repository-factory';
+import Autor from 'src/livro/domain/entity/autor';
+import Editora from 'src/livro/domain/entity/editora';
+import Livro from 'src/livro/domain/entity/livro';
 
 describe('Emprestimo Router', () => {
   let app: any;

@@ -1,6 +1,5 @@
 import DatabaseConnection from 'src/shared/infra/database/database-connection';
-import * as pgm from 'promise-mysql';
-// import * as pgm from 'mysql2';
+import * as mysql2 from 'mysql2';
 
 export default class DatabaseConnectionAdapter implements DatabaseConnection {
   mysql: any
@@ -8,24 +7,16 @@ export default class DatabaseConnectionAdapter implements DatabaseConnection {
     this.connect().then()
   }
   query(statement: string, params: any) {
-    return this.mysql.query(statement, params);
+    return this.mysql.execute(statement, params);
   }
 
   async connect(): Promise<any> {
-    // this.mysql = await pgm.createPool({
-    this.mysql = await pgm.createPool({
-      host: 'us-cdbr-iron-east-05.cleardb.net',
-      port: 3306,
-      user: 'b5351039e7e463',
-      password: '021fafa0',
-      database: 'heroku_fe076c2ee5de15b'
-    })
-    this.mysql = await pgm.createPool({
-      host: 'us-cdbr-iron-east-05.cleardb.net',
-      port: 3306,
-      user: 'b5351039e7e463',
-      password: '021fafa0',
-      database: 'heroku_fe076c2ee5de15b'
+    this.mysql = mysql2.createPool({
+      host: process.env.MYSQL_HOST,
+      port: process.env.MYSQL_PORT ? +process.env.MYSQL_PORT : 3306,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
     })
   }
 }

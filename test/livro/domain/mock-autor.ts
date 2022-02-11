@@ -1,5 +1,5 @@
 import * as faker from 'faker';
-import Autor from 'src/acesso-identificacao/livro/domain/entity/autor';
+import Autor from 'src/livro/domain/entity/autor';
 
 export type AutorParams = {
   nome?: string,

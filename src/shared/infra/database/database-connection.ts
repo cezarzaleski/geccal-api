@@ -1,4 +1,3 @@
 export default interface DatabaseConnection {
-  query(statement: string, params: any): any;
-  connect: () => Promise<any>
+  query(statement: string, params: any): any
 }

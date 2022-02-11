@@ -8,13 +8,13 @@ import PerfilRepository from 'src/acesso-identificacao/domain/repository/perfil-
 import ColaboradorRepository from 'src/acesso-identificacao/domain/repository/colaborador-repository';
 import ColaboradorRepositoryDatabase
   from 'src/acesso-identificacao/infra/database/repository/colaborador-repository-database';
-import AutorRepository from 'src/emprestimo/domain/repository/autor-repository';
-import AutorRepositoryDatabase from 'src/emprestimo/infra/database/repository/autor-repository-database';
-import EditoraRepository from 'src/emprestimo/domain/repository/editora-repository';
-import EditoraRepositoryDatabase from 'src/emprestimo/infra/database/repository/editora-repository-database';
-import LivroRepository from 'src/emprestimo/domain/repository/livro-repository';
-import LivroRepositoryDatabase from 'src/emprestimo/infra/database/repository/livro-repository-database';
 import AbstractRepositoryFactory from 'src/shared/domain/factory/abstract-repository-factory';
+import AutorRepository from 'src/livro/domain/repository/autor-repository';
+import AutorRepositoryDatabase from 'src/livro/infra/database/repository/autor-repository-database';
+import EditoraRepository from 'src/livro/domain/repository/editora-repository';
+import EditoraRepositoryDatabase from 'src/livro/infra/database/repository/editora-repository-database';
+import LivroRepository from 'src/livro/domain/repository/livro-repository';
+import LivroRepositoryDatabase from 'src/livro/domain/repository/livro-repository-database';
 
 export default class DatabaseRepositoryFactory implements AbstractRepositoryFactory {
 

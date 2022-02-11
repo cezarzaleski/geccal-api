@@ -1,5 +1,5 @@
 import * as faker from 'faker';
-import Autor from 'src/acesso-identificacao/livro/domain/entity/autor';
+import Editora from 'src/livro/domain/entity/editora';
 
 export type EditoraParams = {
   nome?: string,
@@ -16,11 +16,11 @@ const defaultParams: EditoraParams = {
 }
 
 
-export const mockEditora = (params?: EditoraParams): Autor =>{
+export const mockEditora = (params?: EditoraParams): Editora =>{
   let editoraParametro = defaultParams
   if (params) editoraParametro = Object.assign(defaultParams, params)
   // @ts-ignore
-  return new Autor(
+  return new Editora(
     editoraParametro?.nome,
     editoraParametro.status,
     editoraParametro.dataCadastro,
