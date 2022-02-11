@@ -1,15 +1,15 @@
-import UserRepositoryDatabase from 'src/acesso-identificacao/infra/database/repository/user-repository-database'
 import { httpResponseError, ok } from 'src/shared/infra/http/http'
 import GetUser from 'src/acesso-identificacao/application/query/get-user'
+import UsuarioRepository from 'src/acesso-identificacao/domain/repository/usuario-repository'
 
 export default class UserController {
   constructor (
-    private readonly userRepository: UserRepositoryDatabase
+    private readonly usuarioRepository: UsuarioRepository
   ) {}
 
-  async findById (id: string): Promise<any> {
+  async findById (id: number): Promise<any> {
     try {
-      const getUser = new GetUser(this.userRepository)
+      const getUser = new GetUser(this.usuarioRepository)
       const user = await getUser.execute(id)
       return ok(user)
     } catch (error) {

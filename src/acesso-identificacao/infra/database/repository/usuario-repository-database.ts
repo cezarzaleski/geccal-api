@@ -32,4 +32,14 @@ export default class UsuarioRepositoryDatabase implements UsuarioRepository {
     );
     return Promise.resolve(undefined);
   }
+
+  findByEmail(email: string): Promise<Usuario> {
+    // @ts-ignore
+    return Promise.resolve(undefined);
+  }
+
+  findById(id: number): Promise<Usuario> {
+    // @ts-ignore
+    return Promise.resolve(undefined);
+  }
 }

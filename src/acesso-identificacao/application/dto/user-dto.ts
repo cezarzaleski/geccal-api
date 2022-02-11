@@ -1,6 +1,6 @@
 export default class UserDto {
   constructor (
-    readonly id: string,
+    readonly id: number,
     readonly name: string,
     readonly email: string
   ) {}
