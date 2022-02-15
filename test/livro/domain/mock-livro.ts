@@ -17,7 +17,7 @@ export type LivroParams = {
 
 const defaultParams: LivroParams = {
   nome: faker.name.firstName(),
-  exemplar: faker.random.number({ min: 1, max: 10 }),
+  exemplar: 1,
   status: true,
   dataCadastro: faker.date.recent().toISOString(),
   id: 1,

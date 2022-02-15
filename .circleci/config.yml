@@ -1,21 +1,228 @@
-# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+# This code is licensed from CircleCI to the user under the MIT license.
+# See here for details: https://circleci.com/developer/orbs/licensing
 version: 2.1
-
-# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
-# See: https://circleci.com/docs/2.0/orb-intro/
+description: |
+  This orb makes it easier to run jest tests in your CircleCI environment. A primary benefit is automatically restoring the jest cache for faster subsequent test runs. You must configure jest for caching to work (see https://github.com/blimmer/jest-circleci-orb#configuration)
+display:
+  source_url: https://www.github.com/blimmer/jest-circleci-orb
 orbs:
-  node: circleci/node@4.7
+  node: circleci/node@4.7.0
+commands:
+  configure:
+    description: |
+      This command configures jest caching behaviors and must be run for jest/restore-cache and jest/save-cache to work properly.
+    steps:
+      - run:
+          command: |
+            # export commit hashes for cache restoration
+            git rev-parse HEAD~1 > /tmp/jest-cache-previous-commit-hash.txt
+            git rev-parse HEAD > /tmp/jest-cache-current-commit-hash.txt
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
-    jobs:
-      - node/test:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+            # check for remote docker
+            if ssh -o "StrictHostKeyChecking=no" remote-docker whoami; then
+              touch /tmp/jest-cache-using-remote-docker
+            fi
+
+            # install rsync if using remote docker
+            if [[ -e "/tmp/jest-cache-using-remote-docker" ]]; then
+              echo 'using remote docker. installing rsync for performance...'
+              sudo apt-get install -y rsync
+            else
+              echo 'not using remote docker'
+            fi
+          name: Configure jest test environment
+  restore-cache:
+    description: |
+      This command restores the jest-cache directory.
+    parameters:
+      jest-cache-location:
+        default: .jest-cache
+        description: The location of the jest cacheDirectory within the working directory
+        type: string
+    steps:
+      - restore_cache:
+          keys:
+            - jest-cache-{{ checksum "/tmp/jest-cache-previous-commit-hash.txt" }}
+          name: Restoring jest cache
+      - run:
+          command: |
+            if [[ -e "/tmp/jest-cache-using-remote-docker" ]]; then
+              if [ -d << parameters.jest-cache-location >> ]; then
+                rsync  -a --rsync-path="mkdir -p $CIRCLE_WORKING_DIRECTORY/<< parameters.jest-cache-location >> && rsync" << parameters.jest-cache-location >> remote-docker:$CIRCLE_WORKING_DIRECTORY
+              fi
+            else
+              echo 'not using remote docker'
+            fi
+          name: Copy jest cache to remote docker (if necessary)
+  save-cache:
+    description: |
+      This command saves the jest-cache directory.
+    parameters:
+      jest-cache-location:
+        default: .jest-cache
+        description: The location of the jest cacheDirectory within the working directory
+        type: string
+    steps:
+      - save_cache:
+          key: jest-cache-{{ checksum "/tmp/jest-cache-current-commit-hash.txt" }}
+          name: Save jest cache
+          paths:
+            - <<parameters.jest-cache-location>>
+          when: always
+executors:
+  default:
+    description: |
+      A default node docker image
+    docker:
+      - image: cimg/node:<<parameters.tag>>
+    parameters:
+      tag:
+        default: lts
+        description: |
+          Pick a specific circleci/node image variant: https://hub.docker.com/r/cimg/node/tags
+        type: string
+jobs:
+  test:
+    description: |
+      Run jest tests, restoring jest's cache for speedier tests.
+    executor: << parameters.executor >>
+    parameters:
+      checkout:
+        default: true
+        description: Boolean for whether or not to checkout as a first step. Default is true.
+        type: boolean
+      executor:
+        default: default
+        description: The executor to use
+        type: executor
+      jest-cache:
+        default: true
+        description: Boolean for whether or not to restore/save the jest cache.
+        type: boolean
+      jest-cache-location:
+        default: .jest-cache
+        description: The location of the jest cacheDirectory within the working directory
+        type: string
+      jest-command-override:
+        default: ""
+        description: |
+          The command to use to run jest.
+          When package-manager is npm -> npx --no-install jest When package-manager is yarn or yarn-berry -> yarn jest
+          Optionally supply a custom command. For instance, if you're using a yarn monorepo, you could provide a `yarn workspaces foreach` command here.
+        type: string
+      package-manager:
+        default: npm
+        description: Select the default node package manager to use. NPM v5+ Required.
+        enum:
+          - npm
+          - yarn
+          - yarn-berry
+        type: enum
+      package-manager-cache:
+        default: true
+        description: Cache your node packages automatically for faster install times.
+        type: boolean
+      package-manager-install-command-override:
+        default: ""
+        description: |
+          By default, packages will be installed with "npm ci", "yarn install --frozen-lockfile" or "yarn install --immutable".
+          Optionally supply a custom package installation command, with any additional flags needed.
+        type: string
+      setup-steps:
+        default: [ ]
+        description: These steps are executed before all other steps. For example, you might log into a private NPM registry.
+        type: steps
+    steps:
+      - steps: << parameters.setup-steps >>
+      - when:
+          condition: << parameters.checkout >>
+          steps:
+            - checkout
+      - node/install-packages:
+          override-ci-command: << parameters.package-manager-install-command-override >>
+          pkg-manager: << parameters.package-manager >>
+          with-cache: << parameters.package-manager-cache >>
+      - configure
+      - when:
+          condition: << parameters.jest-cache >>
+          steps:
+            - restore-cache:
+                jest-cache-location: << parameters.jest-cache-location >>
+      - when:
+          condition:
+            equal:
+              - npm
+              - << parameters.package-manager >>
+          steps:
+            - run:
+                command: |
+                  if [[ ! -z "<< parameters.jest-command-override >>" ]]; then
+                    echo "Running override jest command:"
+                    << parameters.jest-command-override >>
+                  else
+                    npx --no-install jest
+                  fi
+                name: Run Jest tests
+      - when:
+          condition:
+            or:
+              - equal:
+                  - yarn
+                  - << parameters.package-manager >>
+              - equal:
+                  - yarn-berry
+                  - << parameters.package-manager >>
+          steps:
+            - run:
+                command: |
+                  if [[ ! -z "<< parameters.jest-command-override >>" ]]; then
+                    echo "Running override jest command:"
+                    << parameters.jest-command-override >>
+                  else
+                    yarn jest
+                  fi
+                name: Run Jest tests
+      - when:
+          condition: << parameters.jest-cache >>
+          steps:
+            - save-cache:
+                jest-cache-location: << parameters.jest-cache-location >>
+examples:
+  test:
+    description: Run jest tests
+    usage:
+      version: "2.1"
+      orbs:
+        jest: blimmer/jest@x.y.z
+      workflows:
+        test:
+          jobs:
+            - jest/test
+  test-use-yarn:
+    description: Run jest tests
+    usage:
+      version: "2.1"
+      orbs:
+        jest: blimmer/jest@x.y.z
+      workflows:
+        test:
+          jobs:
+            - jest/test:
+                package-manager: yarn-berry
+  test-with-private-npm-login:
+    description: Run jest tests, logging into a private NPM registry
+    usage:
+      version: "2.1"
+      orbs:
+        jest: blimmer/jest@x.y.z
+      workflows:
+        test:
+          jobs:
+            - jest/test:
+                context:
+                  - npm
+                setup-steps:
+                  - run:
+                      command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+                      name: Login to NPM
+

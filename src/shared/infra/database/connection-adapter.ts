@@ -1,22 +1,24 @@
 import DatabaseConnection from 'src/shared/infra/database/database-connection';
-import * as mysql2 from 'mysql2';
+import mysql from 'mysql2';
 
 export default class DatabaseConnectionAdapter implements DatabaseConnection {
-  mysql: any
+  db: any
   constructor() {
-    this.connect().then()
+    this.connect()
   }
-  query(statement: string, params: any) {
-    return this.mysql.execute(statement, params);
+  async query(statement: string, params: any) {
+    let parametros: any = []
+    if (!params) parametros = params
+    return this.db.execute(statement, parametros);
   }
 
-  async connect(): Promise<any> {
-    this.mysql = mysql2.createPool({
+  connect() {
+    this.db = mysql.createConnection({
       host: process.env.MYSQL_HOST,
-      port: process.env.MYSQL_PORT ? +process.env.MYSQL_PORT : 3306,
       user: process.env.MYSQL_USER,
+      port: process.env.MYSQL_PORT ? +process.env.MYSQL_PORT : 3306,
       password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
-    })
+      database: process.env.MYSQL_DATABASE
+    });
   }
 }
