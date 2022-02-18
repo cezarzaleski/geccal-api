@@ -68,6 +68,7 @@
     "ts-jest": "^27.0.7",
     "typescript": "^4.4.4"
   },
+  "workspaces": { "nohoist": ["swagger-ui-express"] },
   "jest": {
     "moduleFileExtensions": [
       "js",
