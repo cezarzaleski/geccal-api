@@ -13,7 +13,8 @@
     "test:unit": "jest -c jest-unit-config.js  --passWithNoTests --no-cache --runInBand",
     "test:coverage": "npm test -- --coverage",
     "start": "cross-env ts-node-dev -r tsconfig-paths/register --respawn -- src/main.ts",
-    "start:prod": "node dist/main"
+    "start:prod": "node dist/main",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
     "type": "git",
