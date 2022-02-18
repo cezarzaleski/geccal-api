@@ -14,8 +14,7 @@
     "test:coverage": "npm test -- --coverage",
     "start": "cross-env ts-node-dev -r tsconfig-paths/register --respawn -- src/main.ts",
     "start:prod": "node dist/main",
-    "postinstall": "tsc --sourceMap false",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run postinstall && npm run build"
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
     "type": "git",
@@ -70,7 +69,7 @@
     "lint-staged": "^11.2.6",
     "ts-jest": "^27.0.7",
     "typescript": "^4.4.4",
-    "ts-node": "^10.0.0"
+    "ts-node-dev": "^1.1.1"
   },
   "engines": {
     "node": "16.13.2",
