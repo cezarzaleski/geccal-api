@@ -1,3 +1,5 @@
+require('iconv-lite').encodingExists('foo')
+
 module.exports = async () => {
   process.env.MYSQL_HOST='us-cdbr-iron-east-05.cleardb.net'
   process.env.MYSQL_PORT=3306

@@ -1,12 +1,12 @@
 {
-  "name": "nutep_backend",
+  "name": "geccal_bilioteca_api",
   "version": "1.0.0",
   "description": "APIs to use at APP of Núcleo de Terapia Nutricional Enteral e Parenteral - NUTEP",
   "main": "index.js",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "test": "jest --forceExit --detectOpenHandles",
+    "test": "jest --forceExit",
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
     "test:integration": "jest -c jest.integration.config.js  --passWithNoTests --no-cache --runInBand",
@@ -84,6 +84,6 @@
     },
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
-    "globalSetup": "./test/setup.js"
+    "globalSetup": "./test/configs/setup.js"
   }
 }
