@@ -2,8 +2,9 @@ import EmptyParamError from 'src/shared/exception/empty-param'
 import InvalidParamError from 'src/shared/exception/invalid-param'
 
 export default class Emprestimo {
-  private readonly emprestadoEm: Date
-  readonly devolvidoEm: Date
+  readonly emprestadoEm: Date
+  readonly devolvidoEm?: Date
+
   constructor (
     emprestadoEm?: string,
     readonly ano?: number,
@@ -25,13 +26,5 @@ export default class Emprestimo {
       this.devolvidoEm = new Date(devolvidoEm)
       if (this.devolvidoEm.toString() === 'Invalid Date') throw new InvalidParamError('devolvidoEm')
     }
-  }
-
-  getEmprestadoEm (): Date {
-    return this.emprestadoEm
-  }
-
-  getDevolvidoEm (): Date {
-    return this.devolvidoEm
   }
 }

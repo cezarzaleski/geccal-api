@@ -17,7 +17,7 @@ export default class EmprestimoRepositoryDatabase implements EmprestimoRepositor
 				)
 			`,
     [
-      emprestimo.getEmprestadoEm().toISOString(), emprestimo.getEmprestadoEm().toISOString(),
+      emprestimo.emprestadoEm.toISOString(), emprestimo.emprestadoEm.toISOString(),
       emprestimo.ano, emprestimo.status, null, emprestimo.colaboradorId, emprestimo.matriculaId,
       emprestimo.usuarioId, emprestimo.livroId
     ]
