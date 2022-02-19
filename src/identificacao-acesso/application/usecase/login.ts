@@ -1,8 +1,8 @@
-import { Encrypter } from 'src/acesso-identificacao/infra/cryptography/encrypter'
-import GeneratePassword from 'src/acesso-identificacao/domain/service/generate-password'
+import { Encrypter } from 'src/identificacao-acesso/infra/cryptography/encrypter'
+import GeneratePassword from 'src/identificacao-acesso/domain/service/generate-password'
 import EmptyParamError from 'src/shared/exception/empty-param'
-import UnauthorizedError from 'src/acesso-identificacao/domain/exception/unauthorized'
-import UsuarioRepository from 'src/acesso-identificacao/domain/repository/usuario-repository'
+import UnauthorizedError from 'src/identificacao-acesso/domain/exception/unauthorized'
+import UsuarioRepository from 'src/identificacao-acesso/domain/repository/usuario-repository'
 
 export default class Login {
   constructor (readonly userRepository: UsuarioRepository, readonly encrypter: Encrypter) {

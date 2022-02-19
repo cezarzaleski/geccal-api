@@ -1,6 +1,6 @@
 import { httpResponseError, ok } from 'src/shared/infra/http/http'
-import GetUser from 'src/acesso-identificacao/application/query/get-user'
-import UsuarioRepository from 'src/acesso-identificacao/domain/repository/usuario-repository'
+import GetUser from 'src/identificacao-acesso/application/query/get-user'
+import UsuarioRepository from 'src/identificacao-acesso/domain/repository/usuario-repository'
 
 export default class UserController {
   constructor (

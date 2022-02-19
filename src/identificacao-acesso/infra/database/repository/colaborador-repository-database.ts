@@ -1,6 +1,6 @@
 import DatabaseConnection from 'src/shared/infra/database/database-connection'
-import ColaboradorRepository from 'src/acesso-identificacao/domain/repository/colaborador-repository'
-import Colaborador from 'src/acesso-identificacao/domain/entity/colaborador'
+import ColaboradorRepository from 'src/identificacao-acesso/domain/repository/colaborador-repository'
+import Colaborador from 'src/identificacao-acesso/domain/entity/colaborador'
 
 export default class ColaboradorRepositoryDatabase implements ColaboradorRepository {
   constructor (readonly databaseConnection: DatabaseConnection) {}

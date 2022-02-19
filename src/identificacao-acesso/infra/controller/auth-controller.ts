@@ -1,7 +1,7 @@
-import Login from 'src/acesso-identificacao/application/usecase/login'
-import { JwtAdapter } from 'src/acesso-identificacao/infra/cryptography/jwt-adapter'
+import Login from 'src/identificacao-acesso/application/usecase/login'
+import { JwtAdapter } from 'src/identificacao-acesso/infra/cryptography/jwt-adapter'
 import { httpResponseError, ok } from 'src/shared/infra/http/http'
-import UsuarioRepository from 'src/acesso-identificacao/domain/repository/usuario-repository'
+import UsuarioRepository from 'src/identificacao-acesso/domain/repository/usuario-repository'
 
 export default class AuthController {
   constructor (

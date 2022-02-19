@@ -1,4 +1,4 @@
-import Perfil from 'src/acesso-identificacao/domain/entity/perfil'
+import Perfil from 'src/identificacao-acesso/domain/entity/perfil'
 
 export default interface PerfilRepository {
   save: (perfil: Perfil) => Promise<Perfil>

@@ -1,14 +1,14 @@
-import Usuario from 'src/acesso-identificacao/domain/entity/usuario';
-import * as faker from 'faker';
+import Usuario from 'src/identificacao-acesso/domain/entity/usuario'
+import * as faker from 'faker'
 
 export type UsuarioParams = {
-  username?: string,
-  password?: string,
-  dataCadastro?: string,
-  status?: boolean,
-  perfilId?: number,
-  colaboradorId?: number,
-  dataUltimaVisita?: string,
+  username?: string
+  password?: string
+  dataCadastro?: string
+  status?: boolean
+  perfilId?: number
+  colaboradorId?: number
+  dataUltimaVisita?: string
   dataDesativacao?: string
 }
 
@@ -20,14 +20,13 @@ const defaultParams: UsuarioParams = {
   perfilId: 1,
   colaboradorId: 1,
   dataUltimaVisita: new Date('2022-02-08').toISOString(),
-  dataDesativacao: undefined,
+  dataDesativacao: undefined
 }
 
-
-export const mockUsuario = (params?: UsuarioParams): Usuario =>{
+export const mockUsuario = (params?: UsuarioParams): Usuario => {
   let usuarioParametro = defaultParams
   if (params) usuarioParametro = Object.assign(defaultParams, params)
-  // @ts-ignore
+  // @ts-expect-error
   return new Usuario(
     usuarioParametro?.username,
     usuarioParametro.password,
@@ -37,7 +36,6 @@ export const mockUsuario = (params?: UsuarioParams): Usuario =>{
     usuarioParametro.colaboradorId,
     usuarioParametro.dataUltimaVisita,
     usuarioParametro.dataDesativacao,
-    1,
-  );
-
+    1
+  )
 }

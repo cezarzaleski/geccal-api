@@ -1,6 +1,6 @@
 import DatabaseConnection from 'src/shared/infra/database/database-connection'
-import UsuarioRepository from 'src/acesso-identificacao/domain/repository/usuario-repository'
-import Usuario from 'src/acesso-identificacao/domain/entity/usuario'
+import UsuarioRepository from 'src/identificacao-acesso/domain/repository/usuario-repository'
+import Usuario from 'src/identificacao-acesso/domain/entity/usuario'
 
 export default class UsuarioRepositoryDatabase implements UsuarioRepository {
   constructor (readonly databaseConnection: DatabaseConnection) {}
