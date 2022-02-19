@@ -10,7 +10,7 @@ export default class DatabaseConnectionAdapter implements DatabaseConnection {
   }
 
   static getInstance (): DatabaseConnectionAdapter {
-    console.log('instanciou', !DatabaseConnectionAdapter.instance)
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!DatabaseConnectionAdapter.instance) {
       DatabaseConnectionAdapter.instance = new DatabaseConnectionAdapter()
     }
@@ -19,12 +19,12 @@ export default class DatabaseConnectionAdapter implements DatabaseConnection {
 
   async query (statement: string, params: any[]): Promise<any> {
     let parametros: any = []
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!params) parametros = params
     return this.db.execute(statement, parametros)
   }
 
   connect (): void {
-    console.log('conectou')
     this.db = mysql.createPool({
       host: process.env.MYSQL_HOST,
       user: process.env.MYSQL_USER,
