@@ -1,8 +1,8 @@
 import { created, httpResponseError } from 'src/shared/infra/http/http'
 import EmprestarLivro from 'src/emprestimo/application/usecase/emprestar-livro'
-import { EmprestarLivroInput } from 'src/emprestimo/application/dto/emprestar-livro-input'
 import EmprestimoRepository from 'src/emprestimo/domain/repository/emprestimo-repository'
 import AbstractRepositoryFactory from 'src/shared/domain/factory/abstract-repository-factory'
+import { EmprestarLivroInput } from 'src/emprestimo/application/dto/emprestar-livro-input'
 
 export default class EmprestimoController {
   emprestimoRepository: EmprestimoRepository

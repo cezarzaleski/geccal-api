@@ -2,8 +2,8 @@ import { Body, Controller, HttpStatus, Inject, Post, Res } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { adaptNestJSResolver } from 'src/shared/infra/http/nestjs/nestjs-router'
 import EmprestimoController from 'src/emprestimo/infra/controller/emprestimo-controller'
-import { EmprestarLivroInput } from 'src/emprestimo/application/dto/emprestar-livro-input'
 import AbstractRepositoryFactory from 'src/shared/domain/factory/abstract-repository-factory'
+import { EmprestarLivroInput } from 'src/shared/infra/http/nestjs/emprestimo/input/emprestar-livro-input'
 
 @Controller('emprestimos')
 @ApiTags('Empréstimo s')
