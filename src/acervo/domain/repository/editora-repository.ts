@@ -1,4 +1,4 @@
-import Editora from 'src/livro/domain/entity/editora'
+import Editora from 'src/acervo/domain/entity/editora'
 
 export default interface EditoraRepository {
   save: (editora: Editora) => Promise<Editora>

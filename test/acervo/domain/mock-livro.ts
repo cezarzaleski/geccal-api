@@ -1,18 +1,18 @@
-import * as faker from 'faker';
-import Livro from 'src/livro/domain/entity/livro';
+import * as faker from 'faker'
+import Livro from 'src/acervo/domain/entity/livro'
 
 export type LivroParams = {
-  nome?: string,
-  exemplar?: number,
-  status?: boolean,
-  dataCadastro?: string,
-  id?: number,
-  edicao?: string,
-  ano?: number,
-  observacao?: string,
-  editoraId?: number,
-  usuarioId?: number,
-  origemLivroId?: number,
+  nome?: string
+  exemplar?: number
+  status?: boolean
+  dataCadastro?: string
+  id?: number
+  edicao?: string
+  ano?: number
+  observacao?: string
+  editoraId?: number
+  usuarioId?: number
+  origemLivroId?: number
 }
 
 const defaultParams: LivroParams = {
@@ -26,14 +26,12 @@ const defaultParams: LivroParams = {
   observacao: 'observação',
   editoraId: 1,
   usuarioId: 1,
-  origemLivroId: 1,
+  origemLivroId: 1
 }
 
-
-export const mockLivro = (params?: LivroParams): Livro =>{
+export const mockLivro = (params?: LivroParams): Livro => {
   let livroParametro = defaultParams
   if (params) livroParametro = Object.assign(defaultParams, params)
-  // @ts-ignore
   return new Livro(
     livroParametro.nome,
     livroParametro.exemplar,
@@ -46,5 +44,5 @@ export const mockLivro = (params?: LivroParams): Livro =>{
     livroParametro.editoraId,
     livroParametro.usuarioId,
     livroParametro.origemLivroId
-  );
+  )
 }

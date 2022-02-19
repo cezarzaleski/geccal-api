@@ -1,6 +1,6 @@
 import DatabaseConnection from 'src/shared/infra/database/database-connection'
-import AutorRepository from 'src/livro/domain/repository/autor-repository'
-import Autor from 'src/livro/domain/entity/autor'
+import AutorRepository from 'src/acervo/domain/repository/autor-repository'
+import Autor from 'src/acervo/domain/entity/autor'
 
 export default class AutorRepositoryDatabase implements AutorRepository {
   constructor (readonly databaseConnection: DatabaseConnection) {}

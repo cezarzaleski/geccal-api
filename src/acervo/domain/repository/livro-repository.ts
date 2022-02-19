@@ -1,5 +1,4 @@
-import Livro from 'src/livro/domain/entity/livro'
-
+import Livro from 'src/acervo/domain/entity/livro'
 
 export default interface LivroRepository {
   save: (livro: Livro) => Promise<Livro>

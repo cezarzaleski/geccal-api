@@ -1,10 +1,10 @@
-import * as faker from 'faker';
-import Editora from 'src/livro/domain/entity/editora';
+import * as faker from 'faker'
+import Editora from 'src/acervo/domain/entity/editora'
 
 export type EditoraParams = {
-  nome?: string,
-  status?: boolean,
-  dataCadastro?: string,
+  nome?: string
+  status?: boolean
+  dataCadastro?: string
   id?: number
 }
 
@@ -15,15 +15,13 @@ const defaultParams: EditoraParams = {
   status: true
 }
 
-
-export const mockEditora = (params?: EditoraParams): Editora =>{
+export const mockEditora = (params?: EditoraParams): Editora => {
   let editoraParametro = defaultParams
   if (params) editoraParametro = Object.assign(defaultParams, params)
-  // @ts-ignore
   return new Editora(
     editoraParametro?.nome,
     editoraParametro.status,
     editoraParametro.dataCadastro,
     editoraParametro.id
-  );
+  )
 }

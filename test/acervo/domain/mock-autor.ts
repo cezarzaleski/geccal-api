@@ -1,10 +1,10 @@
-import * as faker from 'faker';
-import Autor from 'src/livro/domain/entity/autor';
+import * as faker from 'faker'
+import Autor from 'src/acervo/domain/entity/autor'
 
 export type AutorParams = {
-  nome?: string,
-  status?: boolean,
-  dataCadastro?: string,
+  nome?: string
+  status?: boolean
+  dataCadastro?: string
   id?: number
 }
 
@@ -15,15 +15,13 @@ const defaultParams: AutorParams = {
   status: true
 }
 
-
-export const mockAutor = (params?: AutorParams): Autor =>{
+export const mockAutor = (params?: AutorParams): Autor => {
   let autorParametro = defaultParams
   if (params) autorParametro = Object.assign(defaultParams, params)
-  // @ts-ignore
   return new Autor(
     autorParametro?.nome,
     autorParametro.status,
     autorParametro.dataCadastro,
     autorParametro.id
-  );
+  )
 }

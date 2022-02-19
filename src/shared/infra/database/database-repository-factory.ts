@@ -9,12 +9,12 @@ import ColaboradorRepository from 'src/identificacao-acesso/domain/repository/co
 import ColaboradorRepositoryDatabase
   from 'src/identificacao-acesso/infra/database/repository/colaborador-repository-database'
 import AbstractRepositoryFactory from 'src/shared/domain/factory/abstract-repository-factory'
-import AutorRepository from 'src/livro/domain/repository/autor-repository'
-import AutorRepositoryDatabase from 'src/livro/infra/database/repository/autor-repository-database'
-import EditoraRepository from 'src/livro/domain/repository/editora-repository'
-import EditoraRepositoryDatabase from 'src/livro/infra/database/repository/editora-repository-database'
-import LivroRepository from 'src/livro/domain/repository/livro-repository'
-import LivroRepositoryDatabase from 'src/livro/domain/repository/livro-repository-database'
+import AutorRepository from 'src/acervo/domain/repository/autor-repository'
+import AutorRepositoryDatabase from 'src/acervo/infra/database/repository/autor-repository-database'
+import EditoraRepository from 'src/acervo/domain/repository/editora-repository'
+import EditoraRepositoryDatabase from 'src/acervo/infra/database/repository/editora-repository-database'
+import LivroRepository from 'src/acervo/domain/repository/livro-repository'
+import LivroRepositoryDatabase from 'src/acervo/domain/repository/livro-repository-database'
 
 export default class DatabaseRepositoryFactory implements AbstractRepositoryFactory {
   constructor (readonly databaseConnection: DatabaseConnection) {}

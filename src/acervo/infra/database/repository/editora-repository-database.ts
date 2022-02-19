@@ -1,6 +1,6 @@
 import DatabaseConnection from 'src/shared/infra/database/database-connection'
-import EditoraRepository from 'src/livro/domain/repository/editora-repository'
-import Editora from 'src/livro/domain/entity/editora'
+import EditoraRepository from 'src/acervo/domain/repository/editora-repository'
+import Editora from 'src/acervo/domain/entity/editora'
 
 export default class EditoraRepositoryDatabase implements EditoraRepository {
   constructor (readonly databaseConnection: DatabaseConnection) {}
