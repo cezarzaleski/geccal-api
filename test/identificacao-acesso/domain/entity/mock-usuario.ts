@@ -26,7 +26,6 @@ const defaultParams: UsuarioParams = {
 export const mockUsuario = (params?: UsuarioParams): Usuario => {
   let usuarioParametro = defaultParams
   if (params) usuarioParametro = Object.assign(defaultParams, params)
-  // @ts-expect-error
   return new Usuario(
     usuarioParametro?.username,
     usuarioParametro.password,
