@@ -1,6 +1,6 @@
 import request from 'supertest'
 import { nestApp } from 'src/shared/infra/http/nestjs'
-import { RegistrarEmprestimoInput } from 'src/emprestimo/application/dto/registrar-emprestimo-input'
+import { EmprestarLivroInput } from 'src/emprestimo/application/dto/emprestar-livro-input'
 import DatabaseConnectionAdapter from 'src/shared/infra/database/connection-adapter'
 import DatabaseRepositoryFactory from 'src/shared/infra/database/database-repository-factory'
 import { mockUsuario } from 'test/identificacao-acesso/domain/entity/mock-usuario'
@@ -48,7 +48,7 @@ describe('Emprestimo Router', () => {
       await databaseRepositoryFactory.createEditoraRepository().save(editora)
       await databaseRepositoryFactory.createLivroRepository().save(livro)
     })
-    const registrarEmprestimoInput = new RegistrarEmprestimoInput(
+    const registrarEmprestimoInput = new EmprestarLivroInput(
       '2022-02-06',
       2022,
       1,

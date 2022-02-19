@@ -1,6 +1,6 @@
 import Emprestimo from 'src/emprestimo/domain/entity/emprestimo'
 
-export class RegistrarEmprestimoInput {
+export class EmprestarLivroInput {
   constructor (
     readonly emprestadoEm?: string,
     readonly ano?: number,
@@ -10,7 +10,7 @@ export class RegistrarEmprestimoInput {
     readonly matriculaId?: number
   ) {}
 
-  static toEntity (input: RegistrarEmprestimoInput, id?: number): Emprestimo {
+  static toEntity (input: EmprestarLivroInput, id?: number): Emprestimo {
     return new Emprestimo(
       input.emprestadoEm,
       input.ano,
