@@ -1,10 +1,10 @@
-import EmptyParamError from 'src/shared/exception/empty-param';
-import InvalidParamError from 'src/shared/exception/invalid-param';
+import EmptyParamError from 'src/shared/exception/empty-param'
+import InvalidParamError from 'src/shared/exception/invalid-param'
 
 export default class Emprestimo {
   private readonly emprestadoEm: Date
   readonly devolvidoEm: Date
-  constructor(
+  constructor (
     emprestadoEm?: string,
     readonly ano?: number,
     readonly status?: boolean,
@@ -13,7 +13,7 @@ export default class Emprestimo {
     devolvidoEm?: string,
     readonly colaboradorId?: number,
     readonly matriculaId?: number,
-    readonly id?: number,
+    readonly id?: number
   ) {
     if (!emprestadoEm) throw new EmptyParamError('emprestadoEm')
     if (!usuarioId) throw new EmptyParamError('usuarioId')
@@ -27,11 +27,11 @@ export default class Emprestimo {
     }
   }
 
-  getEmprestadoEm(): Date {
+  getEmprestadoEm (): Date {
     return this.emprestadoEm
   }
 
-  getDevolvidoEm(): Date {
+  getDevolvidoEm (): Date {
     return this.devolvidoEm
   }
 }
