@@ -26,7 +26,7 @@
     "@nestjs/jwt": "^7.0.0",
     "@nestjs/microservices": "^7.0.13",
     "@nestjs/passport": "^7.0.0",
-    "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/platform-express": "^9.2.1",
     "@nestjs/platform-fastify": "^7.2.0",
     "@nestjs/swagger": "^4.5.7",
     "@nestjs/typeorm": "^7.1.0",
